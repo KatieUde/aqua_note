@@ -59,6 +59,7 @@ class GenusController extends Controller
     public function showAction($genusName)
     {
         $em = $this->getDoctrine()->getManager();
+        
         $genus = $em->getRepository('AppBundle:Genus')
             ->findOneBy(['name' => $genusName]);
 
@@ -80,8 +81,12 @@ class GenusController extends Controller
         $this->get('logger')
             ->info('Showing genus: '.$genusName);
 
+        $recentNotes = $em->getRepository('AppBundle:GenusNote')
+            ->findAllRecentNotesForGenus($genus);
+
         return $this->render('genus/show.html.twig', [
-            'genus' => $genus
+            'genus' => $genus,
+            'recentNoteCount' => count($recentNotes)
         ]);
     }
 
