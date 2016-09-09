@@ -45,10 +45,11 @@ class Genus
 
     /**
      * @ORM\OneToMany(targetEntity="GenusNote", mappedBy="genus")
+     * @ORM\OrderBy({"createdAt"="DESC"})
      */
     private $notes;
 
-    public function __contstruct()
+    public function __construct()
     {
         $this->notes = new ArrayCollection();
     }
@@ -103,6 +104,9 @@ class Genus
         $this->isPublished = $isPublished;
     }
 
+    /**
+     * @return ArrayCollection|GenusNote[]
+     */
     public function getNotes()
     {
         return $this->notes;
