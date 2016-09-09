@@ -37,6 +37,19 @@ class GenusNote
      */
     private $createdAt;
 
+    // Whenever you have a relation start by figuring out which Entity should have the foreign key(FK) column
+    // Then add the ManyToOne relationship there first
+    // This is the only side of the relationship that you MUST have
+            // ManyToOne = owning side **(REQUIRED)**
+            // OnetoMany = inverse side **(OPTIONAL)**
+    // You **CANNOT** set data on the inverse side...**ONLY** on the owning side
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Genus", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $genus;
+
     public function getId()
     {
         return $this->id;
@@ -80,5 +93,15 @@ class GenusNote
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getGenus()
+    {
+        return $this->genus;
+    }
+
+    public function setGenus(Genus $genus)
+    {
+        $this->genus = $genus;
     }
 }

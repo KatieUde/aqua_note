@@ -11,4 +11,5 @@ AppBundle\Entity\GenusNote:
         username: <username()>
         userAvatarFilename: '50%? leanna.jpeg : ryan.jpeg'
         note: <paragraph()>
-        createdAt: <dateTimeBetween('-6 months', 'now')> 
+        createdAt: <dateTimeBetween('-6 months', 'now')>
+        genus: '@genus_*' 
