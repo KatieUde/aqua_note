@@ -9,12 +9,12 @@
         <div class="genus-photo"></div>
         <div class="genus-details">
             <dl class="genus-details-list">
-                <dt>{{ genus.subFamily }}</dt>
-                <dd>Octopodinae</dd>
+                <dt>SubFamily:</dt>
+                <dd>{{ genus.subFamily }}</dd>
                 <dt>Known Species:</dt>
                 <dd>{{ genus.speciesCount|number_format }}</dd>
                 <dt>Fun Fact:</dt>
-                <dd>{{ genus.funFact }}</dd>
+                <dd>{{ funFact }}</dd>
                 <dt>Recent Notes</dt>
                 <dd>{{ recentNoteCount }}</dd>
             </dl>
