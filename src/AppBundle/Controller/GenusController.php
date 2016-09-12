@@ -71,7 +71,9 @@ class GenusController extends Controller
             throw $this->createNotFoundException('No genus found');
         }
 
-        $transformer = new MarkdownTransformer();
+        $transformer = new MarkdownTransformer(
+            $this->get('markdown.parser')
+        );
         $funFact = $transformer->parse($genus->getFunFact());
 
         // $cache = $this->get('doctrine_cache.providers.my_markdown_cache');
@@ -80,7 +82,7 @@ class GenusController extends Controller
         //     $funFact = $cache->fetch($key);
         // } else {
         //     sleep(1);
-        //     $funFact = $this ->get('markdown.parser')
+        //     $funFact = $this->get('markdown.parser')
         //         ->transform($funFact);
         //     $cache->save($key, $funFact);
         // }
