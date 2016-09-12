@@ -4,6 +4,19 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.markdown_transformer:
+        class: AppBundle\Service\MarkdownTransformer
+        arguments: ['@markdown.parser', '@doctrine_cache.providers.my_markdown_cache']
+        # the @ in the argument is special since it is asking for a service rather than a string
+
+    app.markdown_extension:
+        class: AppBundle\Twig\MarkdownExtension
+        tags:
+            - { name: twig.extension }
+            # Tags are THE way to hook your services into different part of the core system
+            # When Symfony creates the Twig service it looks for all services in the container that are tagged with twig.extension
+            # It then configures these as extensions on Twig
+            # The Dependency Injection Tags documentation for Symfony lists EVERY tag that can be used to hook into core Symfony
+
+        # arguments: ['@app.markdown_transformer']
+        autowire: true
